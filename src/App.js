@@ -38,7 +38,7 @@ function App() {
   return (
     <div className="App">
          <h2>Stopwatch</h2>
-         <p>{min}:{r>=10?"":l}{r}</p>
+         <p>Time: {min}:{r>=10?"":l}{r}</p>
          <button onClick={()=>setTog((prev)=>!prev)}>{!tog?"Start":"Stop"}</button>{" "}
          <button onClick={resetFun}>Reset</button>
     </div>
