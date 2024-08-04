@@ -1,23 +1,45 @@
-import logo from './logo.svg';
+import React,{useEffect, useState} from "react"
 import './App.css';
 
 function App() {
+  const [min,setMin] = useState(0);
+  const [l,setL] = useState(0);
+  const [r,setR] = useState(0);
+  const [tog,setTog] = useState(false)
+  const [t,setT] = useState(0);
+  useEffect(()=>{
+    let intervalId,time=t;
+    if(tog){
+        intervalId = setInterval(()=>{
+        time=time+1;
+        if(time===60){
+          setMin((prev)=>prev+1);
+          setR(0);
+          // setL(0);
+          time=0;
+        }else{
+        setR(time);
+        setT(time);
+        }
+        },1000);
+      }else{
+          clearInterval(intervalId)
+      }
+      return ()=>{
+        clearInterval(intervalId)
+      }
+    },[tog])
+    const resetFun = ()=>{
+      setMin(0);
+      setR(0);
+      setTog(false);
+    }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+         <h2>Stopwatch</h2>
+         <p>{min}:{r>=10?"":l}{r}</p>
+         <button onClick={()=>setTog((prev)=>!prev)}>{!tog?"Start":"Stop"}</button>{" "}
+         <button onClick={resetFun}>Reset</button>
     </div>
   );
 }
