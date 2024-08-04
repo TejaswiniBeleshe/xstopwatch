@@ -32,6 +32,7 @@ function App() {
     const resetFun = ()=>{
       setMin(0);
       setR(0);
+      setT(0)
       setTog(false);
     }
   return (
